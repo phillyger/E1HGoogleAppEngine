@@ -33,6 +33,13 @@ var PARSE_DOT_COM_NAMED_CLASS_GROUP_ID_PROPERTY_NAME_DEV = "PARSE_DOT_COM_NAMED_
 var PARSE_DOT_COM_NAMED_CLASS_VENUE_ID_PROPERTY_NAME_DEV = "PARSE_DOT_COM_NAMED_CLASS_VENUE_ID_DEV";
 
 
+/**
+ * Key of ScriptProperties for Parse.com a class name (EVENT) Type with ObjectID value.
+ * @type {String}
+ * @const
+ */
+var PARSE_DOT_COM_NAMED_CLASS_EVENTTYPE_PROPERTY_NAME_DEV = "PARSE_DOT_COM_NAMED_CLASS_EVENTTYPE_DEV";
+
 
 
 /***************** PARSE.com PRODUCTION KEYS *********************
@@ -74,6 +81,12 @@ var PARSE_DOT_COM_NAMED_CLASS_GROUP_ID_PROPERTY_NAME = "PARSE_DOT_COM_NAMED_CLAS
  */
 var PARSE_DOT_COM_NAMED_CLASS_VENUE_ID_PROPERTY_NAME = "PARSE_DOT_COM_NAMED_CLASS_VENUE_ID_PROD";
 
+/**
+ * Key of ScriptProperties for Parse.com a class name (EVENT) Type with ObjectID value.
+ * @type {String}
+ * @const
+ */
+var PARSE_DOT_COM_NAMED_CLASS_EVENTTYPE_PROPERTY_NAME = "PARSE_DOT_COM_NAMED_CLASS_EVENTTYPE_PROD";
 
 
 if (DEBUG) {
@@ -81,6 +94,7 @@ if (DEBUG) {
   PARSE_DOT_COM_REST_API_KEY_PROPERTY_NAME = PARSE_DOT_COM_REST_API_KEY_PROPERTY_NAME_DEV;
   PARSE_DOT_COM_NAMED_CLASS_VENUE_ID_PROPERTY_NAME = PARSE_DOT_COM_NAMED_CLASS_VENUE_ID_PROPERTY_NAME_DEV;
   PARSE_DOT_COM_NAMED_CLASS_GROUP_ID_PROPERTY_NAME = PARSE_DOT_COM_NAMED_CLASS_GROUP_ID_PROPERTY_NAME_DEV;
+  PARSE_DOT_COM_NAMED_CLASS_EVENTTYPE_PROPERTY_NAME = PARSE_DOT_COM_NAMED_CLASS_EVENTTYPE_PROPERTY_NAME_DEV;
   
 }
 
@@ -97,6 +111,7 @@ function ParseDotCom() {
           this.consumerRESTAPIKey = optns.consumerRestAPIKey || this.getConsumerRESTAPIKey();
           this.consumerNamedClassGroupId = optns.consumerNamedClassGroupId || this.getConsumerNamedClassGroupId();
           this.consumerNamedClassVenueId = optns.consumerNamedClassVenueId || this.getConsumerNamedClassVenueId();
+          this.consumerNamedClassEventType = optns.consumerNamedClassEventType || this.getConsumerNamedClassEventType();
           
           this.rowData = optns.rowData || this.getRowData();
         },
@@ -199,6 +214,17 @@ function ParseDotCom() {
         Logger.log('Value is : ' + this.consumerNamedClassVenueId);
           return this.consumerNamedClassVenueId;
       },
+      
+      getConsumerNamedClassEventType : function() {
+          Logger.log('Calling getConsumerNamedClassEventType - ParseDotCom:' + PARSE_DOT_COM_NAMED_CLASS_EVENTTYPE_PROPERTY_NAME);
+          this.consumerNamedClassEventType = ScriptProperties.getProperty(PARSE_DOT_COM_NAMED_CLASS_EVENTTYPE_PROPERTY_NAME);
+          if (this.consumerNamedClassEventType == null) {
+            this.consumerNamedClassEventType = "";
+          }
+         
+        Logger.log('Value is : ' + this.consumerNamedClassEventType);
+          return this.consumerNamedClassEventType;
+      },
         
         setRowData: function (row, queryStatus) {
           Logger.log('queryStatus ' + queryStatus); 
@@ -214,6 +240,7 @@ function ParseDotCom() {
                           "utcOffset":row["utc_offset"],
                           "groupId":{"__type":"Pointer","className":"Group","objectId":this.consumerNamedClassGroupId},
                           "venueId":{"__type":"Pointer","className":"Venue","objectId":this.consumerNamedClassVenueId},
+                          "type":{"__type":"Pointer","className":"EventType","objectId":this.consumerNamedClassEventType},
                          }
           } else {
                       this.rowData = { 
@@ -226,7 +253,8 @@ function ParseDotCom() {
                           "time":row["time"],
                           "utcOffset":row["utc_offset"],
                           "groupId":{"__type":"Pointer","className":"Group","objectId":this.consumerNamedClassGroupId},
-                          "venueId":{"__type":"Pointer","className":"Venue","objectId":this.consumerNamedClassVenueId}
+                          "venueId":{"__type":"Pointer","className":"Venue","objectId":this.consumerNamedClassVenueId},
+                          "type":{"__type":"Pointer","className":"EventType","objectId":this.consumerNamedClassEventType},
                          }
           }
         },
