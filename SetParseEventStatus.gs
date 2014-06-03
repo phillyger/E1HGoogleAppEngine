@@ -187,6 +187,7 @@ function setCustomEventRow() {
       
       Logger.log("parseDotComObj.getConsumerNamedClassVenueID : " + parseDotComObj.getConsumerNamedClassVenueId());
       Logger.log("parseDotComObj.getConsumerNamedClassGroupID : " + parseDotComObj.getConsumerNamedClassGroupId());
+      Logger.log("parseDotComObj.getConsumerNamedClassEventType : " + parseDotComObj.getConsumerNamedClassEventType());
                 
         var payload = {"duration": 5400000, 
                           "eventId":"123456", 
@@ -198,7 +199,8 @@ function setCustomEventRow() {
                           "time":1363822200000,
                           "utcOffset":-14000000,
                           "groupId":{"__op":"AddRelation","objects":[{"__type":"Pointer","className":"Group","objectId":"G9uO7rW5m7"}]},
-                          "venueId":{"__op":"AddRelation","objects":[{"__type":"Pointer","className":"Venue","objectId":"9ModxnN9Zg"}]}
+                          "venueId":{"__op":"AddRelation","objects":[{"__type":"Pointer","className":"Venue","objectId":"9ModxnN9Zg"}]},
+                          "type":{"__op":"AddRelation","objects":[{"__type":"Pointer","className":"EventType","objectId":"4gJ4jj2P9w"}]}
                          } 
         
 
